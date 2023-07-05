@@ -1605,7 +1605,7 @@ async def manual_filters(client, message, text=False):
 
                         else:
                             button = eval(btn)
-                           dm = await client.send_message(
+                            dm = await client.send_message(
                                 group_id,
                                 reply_text,
                                 disable_web_page_preview=True,
@@ -1640,7 +1640,7 @@ async def manual_filters(client, message, text=False):
                                     await message.delete()
 
                     elif btn == "[]":
-                       dm = await client.send_cached_media(
+                        dm = await client.send_cached_media(
                             group_id,
                             fileid,
                             caption=reply_text or "",
@@ -1675,7 +1675,7 @@ async def manual_filters(client, message, text=False):
 
                     else:
                         button = eval(btn)
-                       dm = await message.reply_cached_media(
+                        dm = await message.reply_cached_media(
                             fileid,
                             caption=reply_text or "",
                             reply_markup=InlineKeyboardMarkup(button),
