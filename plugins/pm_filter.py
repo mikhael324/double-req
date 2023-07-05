@@ -1570,16 +1570,16 @@ async def manual_filters(client, message, text=False):
                 try:
                     if fileid == "None":
                         if btn == "[]":
-                           dm = await client.send_message(
+                            dm = await client.send_message(
                                 group_id, 
                                 reply_text, 
                                 disable_web_page_preview=True,
                                 protect_content=True if settings["file_secure"] else False,
                                 reply_to_message_id=reply_id
                             )
-                           await asyncio.sleep(30)
-                           await dm.delete()
-                           await message.delete()       
+                            await asyncio.sleep(30)
+                            await dm.delete()
+                            await message.delete()       
                             try:
                                 if settings['auto_ffilter']:
                                     await auto_filter(client, message)
