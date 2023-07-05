@@ -277,11 +277,11 @@ async def advantage_spoll_choker(bot, query):
             k = await query.message.edit(f"\n👋 Hello {reqstr.mention},\n\n <b>I couldn't find </b><b>'{movie}'</b><b> in my Database</b> \n \n <b> Maybe Not Yet Released In OTT Platforms ⚠️</b>")
             await asyncio.sleep(10)
             await k.delete()
-          
-            try:
-                await query.message.reply_to_message.delete()
-            except:
-                pass
+            await query.message.reply_to_message.delete()
+       
+                
+            
+                
 
 @Client.on_callback_query()
 async def cb_handler(client: Client, query: CallbackQuery):
