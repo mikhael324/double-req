@@ -270,17 +270,14 @@ async def advantage_spoll_choker(bot, query):
             k = (movie, files, offset, total_results)
             await auto_filter(bot, query, k)
         else:
-            await bot.send_message(chat_id=LOG_CHANNEL, script.NORSLTS.format(reqstr.id, reqstr.mention, movie))
-            reqstr1 = query.from_user.id if query.from_user else 0
-            reqstr = await bot.get_users(reqstr1)
-            if NO_RESULTS_MSG:
-            
-        k = await query.message.edit(f"👋 Hello {query.from_user.mention},\n\n <b>I couldn't find </b><b>'{search}'</b><b> in my Database</b> \n \n <b> Maybe Not Yet Released In OTT Platforms ⚠️</b>")
-            await asyncio.sleep(10)
-            await k.delete()
-            try:
-                await query.message.reply_to_message.delete()
-
+             await bot.send_message(LOG_CHANNEL, script.NORSLTS.format(query.message.chat.title, query.message.chat.id, query.from_user.mention, search))
+             k = await query.message.edit(f"👋 Hello {query.from_user.mention},\n\n <b>I couldn't find </b><b>'{search}'</b><b> in my Database</b> \n \n <b> Maybe Not Yet Released In OTT Platforms ⚠️</b>")
+             await asyncio.sleep(60)
+             await k.delete()
+             try:
+                 await query.message.reply_to_message.delete()
+            except:
+                pass
 
 @Client.on_callback_query()
 async def cb_handler(client: Client, query: CallbackQuery):
