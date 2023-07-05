@@ -1570,13 +1570,18 @@ async def manual_filters(client, message, text=False):
                 try:
                     if fileid == "None":
                         if btn == "[]":
-                            joelkb = await client.send_message(
+                           dm = await client.send_message(
                                 group_id, 
                                 reply_text, 
                                 disable_web_page_preview=True,
                                 protect_content=True if settings["file_secure"] else False,
                                 reply_to_message_id=reply_id
                             )
+                            await asyncio.sleep(30)
+
+                            await dm.delete()
+
+                            await message.delete()
                             try:
                                 if settings['auto_ffilter']:
                                     await auto_filter(client, message)
@@ -1588,17 +1593,21 @@ async def manual_filters(client, message, text=False):
                                     await auto_filter(client, message)
                             try:
                                 if settings['auto_delete']:
-                                    await joelkb.delete()
+                                    await asyncio.sleep(30)
+                                    await dm.delete()
+                                    await message.delete()
                             except KeyError:
                                 grpid = await active_connection(str(message.from_user.id))
                                 await save_group_settings(grpid, 'auto_delete', True)
                                 settings = await get_settings(message.chat.id)
                                 if settings['auto_delete']:
-                                    await joelkb.delete()
+                                    await asyncio.sleep(30)
+                                    await dm.delete()
+                                    await message.delete()
 
                         else:
                             button = eval(btn)
-                            hmm = await client.send_message(
+                           dm = await client.send_message(
                                 group_id,
                                 reply_text,
                                 disable_web_page_preview=True,
@@ -1606,6 +1615,9 @@ async def manual_filters(client, message, text=False):
                                 protect_content=True if settings["file_secure"] else False,
                                 reply_to_message_id=reply_id
                             )
+                            await asyncio.sleep(30)
+                            await dm.delete()
+                            await message.delete()
                             try:
                                 if settings['auto_ffilter']:
                                     await auto_filter(client, message)
@@ -1617,22 +1629,29 @@ async def manual_filters(client, message, text=False):
                                     await auto_filter(client, message)
                             try:
                                 if settings['auto_delete']:
-                                    await hmm.delete()
+                                    await asyncio.sleep(30)
+                                    await dm.delete()
+                                    await message.delete()
                             except KeyError:
                                 grpid = await active_connection(str(message.from_user.id))
                                 await save_group_settings(grpid, 'auto_delete', True)
                                 settings = await get_settings(message.chat.id)
                                 if settings['auto_delete']:
-                                    await hmm.delete()
+                                    await asyncio.sleep(30)
+                                    await dm.delete()
+                                    await message.delete()
 
                     elif btn == "[]":
-                        oto = await client.send_cached_media(
+                       dm = await client.send_cached_media(
                             group_id,
                             fileid,
                             caption=reply_text or "",
                             protect_content=True if settings["file_secure"] else False,
                             reply_to_message_id=reply_id
                         )
+                        await asyncio.sleep(30)
+                        await dm.delete()
+                        await message.delete()
                         try:
                             if settings['auto_ffilter']:
                                 await auto_filter(client, message)
@@ -1644,22 +1663,29 @@ async def manual_filters(client, message, text=False):
                                 await auto_filter(client, message)
                         try:
                             if settings['auto_delete']:
-                                await oto.delete()
+                                await asyncio.sleep(30)
+                                await dm.delete()
+                                await message.delete()
                         except KeyError:
                             grpid = await active_connection(str(message.from_user.id))
                             await save_group_settings(grpid, 'auto_delete', True)
                             settings = await get_settings(message.chat.id)
                             if settings['auto_delete']:
-                                await oto.delete()
+                                await asyncio.sleep(30)
+                                await dm.delete()
+                                await message.delete()
 
                     else:
                         button = eval(btn)
-                        dlt = await message.reply_cached_media(
+                       dm = await message.reply_cached_media(
                             fileid,
                             caption=reply_text or "",
                             reply_markup=InlineKeyboardMarkup(button),
                             reply_to_message_id=reply_id
                         )
+                        await asyncio.sleep(30)
+                        await dm.delete()
+                        await message.delete()
                         try:
                             if settings['auto_ffilter']:
                                 await auto_filter(client, message)
@@ -1671,13 +1697,17 @@ async def manual_filters(client, message, text=False):
                                 await auto_filter(client, message)
                         try:
                             if settings['auto_delete']:
-                                await dlt.delete()
+                                await asyncio.sleep(30)
+                                await dm.delete()
+                                await message.delete()
                         except KeyError:
                             grpid = await active_connection(str(message.from_user.id))
                             await save_group_settings(grpid, 'auto_delete', True)
                             settings = await get_settings(message.chat.id)
                             if settings['auto_delete']:
-                                await dlt.delete()
+                                await asyncio.sleep(30)
+                                await dm.delete()
+                                await message.delete()
 
                 except Exception as e:
                     logger.exception(e)
