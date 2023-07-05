@@ -84,6 +84,9 @@ async def get_search_results(chat_id, query, file_type=None, max_results=10, off
             else:
                 max_results = int(MAX_B_TN)
     query = query.strip()
+     if filter:
+        query = query.replace(' ', r'.*[\s\.\+\-_\(\)]')
+        raw_pattern = r'((\b|[\.\+\-_])' + query + r'(\b|[\.\+\-_]))'
     #if filter:
         #better ?
         #query = query.replace(' ', r'(\s|\.|\+|\-|_)')
@@ -91,9 +94,9 @@ async def get_search_results(chat_id, query, file_type=None, max_results=10, off
     if not query:
         raw_pattern = '.'
     elif ' ' not in query:
-        raw_pattern = r'(\b|[\.\+\-_])' + query + r'(\b|[\.\+\-_])'
+        raw_pattern = r'((\b|[\.\+\-_])' + query + r'(\b|[\.\+\-_]))'
     else:
-        raw_pattern = query.replace(' ', r'.*[\s\.\+\-_]')
+        raw_pattern = query.replace(' ', r'.*[\s\.\+\-_\(\)]')
     
     try:
         regex = re.compile(raw_pattern, flags=re.IGNORECASE)
