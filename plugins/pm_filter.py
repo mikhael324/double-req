@@ -273,10 +273,12 @@ async def advantage_spoll_choker(bot, query):
             reqstr1 = query.from_user.id if query.from_user else 0
             reqstr = await bot.get_users(reqstr1)
             if NO_RESULTS_MSG:
-                await bot.send_message(chat_id=LOG_CHANNEL, text=(script.NORSLTS.format(reqstr.id, reqstr.mention, movie)))
-            k = await query.message.edit(script.MVE_NT_FND)
+            await bot.send_message(chat_id=LOG_CHANNEL, text=(script.NORSLTS.format(reqstr.id, reqstr.mention, movie)))
+            k = await query.message.edit(f"👋 Hello {query.from_user.mention},\n\n <b>I couldn't find </b><b>'{search}'</b><b> in my Database</b> \n \n <b> Maybe Not Yet Released In OTT Platforms ⚠️</b>")
             await asyncio.sleep(10)
             await k.delete()
+            try:
+                await query.message.reply_to_message.delete()
 
 
 @Client.on_callback_query()
