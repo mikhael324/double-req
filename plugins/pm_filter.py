@@ -270,12 +270,12 @@ async def advantage_spoll_choker(bot, query):
             k = (movie, files, offset, total_results)
             await auto_filter(bot, query, k)
         else:
-             await bot.send_message(LOG_CHANNEL, script.NORSLTS.format(query.message.chat.title, query.message.chat.id, query.from_user.mention, search))
-             k = await query.message.edit(f"👋 Hello {query.from_user.mention},\n\n <b>I couldn't find </b><b>'{search}'</b><b> in my Database</b> \n \n <b> Maybe Not Yet Released In OTT Platforms ⚠️</b>")
-             await asyncio.sleep(60)
-             await k.delete()
-             try:
-                 await query.message.reply_to_message.delete()
+            await bot.send_message(LOG_CHANNEL, script.NORSLTS.format(query.message.chat.title, query.message.chat.id, query.from_user.mention, search))
+            k = await query.message.edit(f"👋 Hello {query.from_user.mention},\n\n <b>I couldn't find </b><b>'{search}'</b><b> in my Database</b> \n \n <b> Maybe Not Yet Released In OTT Platforms ⚠️</b>")
+            await asyncio.sleep(60)
+            await k.delete()
+            try:
+                await query.message.reply_to_message.delete()
             except:
                 pass
 
