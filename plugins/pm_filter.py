@@ -1577,9 +1577,9 @@ async def manual_filters(client, message, text=False):
                                 protect_content=True if settings["file_secure"] else False,
                                 reply_to_message_id=reply_id
                             )
-                                await asyncio.sleep(30)
-                                await dm.delete()
-                                await message.delete()
+                            await asyncio.sleep(30)
+                            await dm.delete()
+                            await message.delete()
                             try:
                                 if settings['auto_ffilter']:
                                     await auto_filter(client, message)
