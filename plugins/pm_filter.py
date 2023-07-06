@@ -90,11 +90,12 @@ async def next_page(bot, query):
     if not files:
         return
     settings = await get_settings(query.message.chat.id)
+    temp.SEND_ALL_TEMP[query.from_user.id] = files
     if settings['button']:
         btn = [
             [
                 InlineKeyboardButton(
-                    text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
+                    text=f"[{get_size(file.file_size)}] {file.file_name}", url=await get_shortlink(query.message.chat.id, f"https://telegram.dog/{temp.U_NAME}?start=files_{file.file_id}")
                 ),
             ]
             for file in files
@@ -240,7 +241,8 @@ async def next_page(bot, query):
                     ],
                 )
     btn.insert(0, [
-        InlineKeyboardButton("❗ Cʜᴇᴄᴋ Bᴏᴛ PM ❗", url=f"https://t.me/{temp.U_NAME}")
+        InlineKeyboardButton("❗ Cʜᴇᴄᴋ Bᴏᴛ PM ❗", url=f"https://t.me/{temp.U_NAME}"),
+        InlineKeyboardButton("♨️ Sent All Files ♨️", callback_data=f"send_fall#files#{offset}#{req}")
     ])
     try:
         await query.edit_message_reply_markup(
