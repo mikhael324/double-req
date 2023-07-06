@@ -242,7 +242,7 @@ async def next_page(bot, query):
                 )
     btn.insert(0, [
         InlineKeyboardButton("❗ Cʜᴇᴄᴋ Bᴏᴛ PM ❗", url=f"https://t.me/{temp.U_NAME}"),
-        InlineKeyboardButton("♨️ Sent All Files ♨️", callback_data=f"send_fall#{pre}#{0}#{userid}")
+        InlineKeyboardButton("♨️ Sent All Files ♨️", callback_data=f"send_all#files#{offset}#{req}"))
     ])
     try:
         await query.edit_message_reply_markup(
