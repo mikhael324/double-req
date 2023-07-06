@@ -86,3 +86,36 @@ LOG_STR += ("Long IMDB storyline enabled." if LONG_IMDB_DESCRIPTION else "LONG_I
 LOG_STR += ("Spell Check Mode Is Enabled, bot will be suggesting related movies if movie not found\n" if SPELL_CHECK_REPLY else "SPELL_CHECK_REPLY Mode disabled\n")
 LOG_STR += (f"MAX_LIST_ELM Found, long list will be shortened to first {MAX_LIST_ELM} elements\n" if MAX_LIST_ELM else "Full List of casts and crew will be shown in imdb template, restrict them by adding a value to MAX_LIST_ELM\n")
 LOG_STR += f"Your current IMDB template is {IMDB_TEMPLATE}"
+
+
+## EXTRA FEATURES ##
+
+      # URL Shortener #
+
+URL_SHORTENR_WEBSITE = environ.get('URL_SHORTENR_WEBSITE', 'kpslink.in')
+
+URL_SHORTNER_WEBSITE_API = environ.get('URL_SHORTNER_WEBSITE_API', 'a06e1900fcb6ee84aad03229d11d89f39d40efd6')
+
+     # Auto Delete For Group Message (Self Delete) #
+
+SELF_DELETE_SECONDS = int(environ.get('SELF_DELETE_SECONDS', 40))
+
+SELF_DELETE = environ.get('SELF_DELETE', True)
+
+if SELF_DELETE == "True":
+
+    SELF_DELETE = True
+
+    # Download Tutorial Button #
+
+DOWNLOAD_TEXT_NAME = "📥 HOW TO DOWNLOAD 📥"
+
+DOWNLOAD_TEXT_URL = "https://t.me/MvMKnowHow/5"
+
+   # Custom Caption Under Button #
+
+CAPTION_BUTTON = "Suscribe"
+
+CAPTION_BUTTON_URL = "https://youtube.com/channel/UCqts9WhhlioK3RB9XQQzoAg"
+
+   # Auto Delete For Bot Sending Files #
