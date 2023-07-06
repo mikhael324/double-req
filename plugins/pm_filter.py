@@ -95,7 +95,7 @@ async def next_page(bot, query):
         btn = [
             [
                 InlineKeyboardButton(
-                    text=f"[{get_size(file.file_size)}] {file.file_name}", url=await get_shortlink(f"https://telegram.dog/{temp.U_NAME}?start=files_{file.file_id}")
+                    text=f"🍿 [{get_size(file.file_size)}] 🎬 {file.file_name}", url=await get_shortlink(f"https://telegram.dog/{temp.U_NAME}?start=files_{file.file_id}")
                 ),
             ]
             for file in files
@@ -241,8 +241,8 @@ async def next_page(bot, query):
                     ],
                 )
     btn.insert(0, [
-        InlineKeyboardButton("❗ Cʜᴇᴄᴋ Bᴏᴛ PM ❗", url=f"https://t.me/{temp.U_NAME}"),
-        InlineKeyboardButton("♨️ Sent All Files ♨️", callback_data=f"send_all#files#{offset}#{req}")
+        InlineKeyboardButton("❗ Cʜᴇᴄᴋ Bᴏᴛ PM ❗", url=f"https://t.me/{temp.U_NAME}")
+       
     ])
     try:
         await query.edit_message_reply_markup(
@@ -545,8 +545,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
                              [
                               InlineKeyboardButton('🔻 Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ 🔻', url=GRP_LNK),
                               InlineKeyboardButton('🔰 Uᴘᴅᴀᴛᴇs Cʜᴀɴɴᴇʟ 🔰', url=CHNL_LNK)
-                           ],[
-                              InlineKeyboardButton("🔻 Bᴏᴛ Oᴡɴᴇʀ 🔻", url="t.me/NAZZY_FF")
+                            
+                            
                              ]
                             ]
                         )
@@ -593,8 +593,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
                  [
                   InlineKeyboardButton('🔻 Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ 🔻', url=GRP_LNK),
                   InlineKeyboardButton('🔰 Uᴘᴅᴀᴛᴇs Cʜᴀɴɴᴇʟ 🔰', url=CHNL_LNK)
-               ],[
-                  InlineKeyboardButton("🔻 Bᴏᴛ Oᴡɴᴇʀ 🔻", url="t.me/NAZZY_FF")
+                
+                  
                  ]
                 ]
             )
@@ -1276,7 +1276,7 @@ async def auto_filter(client, msg, spoll=False):
         btn = [
             [
                 InlineKeyboardButton(
-                    text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'{pre}#{file.file_id}'
+                    text=f"🍿 [{get_size(file.file_size)}] 🎬 {file.file_name}", url=await get_shortlink(f"https://telegram.dog/{temp.U_NAME}?start=files_{file.file_id}")
                 ),
             ]
             for file in files
