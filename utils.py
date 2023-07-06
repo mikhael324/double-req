@@ -1,6 +1,6 @@
 import logging
 from pyrogram.errors import InputUserDeactivated, UserNotParticipant, FloodWait, UserIsBlocked, PeerIdInvalid
-from info import AUTH_CHANNEL, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM, REQ_CHANNEL, ADMINS
+from info import *
 from imdb import Cinemagoer 
 import asyncio
 from pyrogram.types import Message, InlineKeyboardButton
@@ -14,6 +14,7 @@ from typing import List
 from database.users_chats_db import db
 from bs4 import BeautifulSoup
 import requests
+import aiohttp
 from database.join_reqs import JoinReqs as db2
 
 
@@ -458,6 +459,49 @@ async def send_all(bot, userid, files, ident):
             )
         return 'fsub'
 
+async def get_shortlink(link):
+
+    https = link.split(":")[0]
+
+    if "http" == https:
+
+        https = "https"
+
+        link = link.replace("http", https)
+
+    url = f'https://kpslink.in/api'
+
+    params = {'api': URL_SHORTNER_WEBSITE_API,
+
+              'url': link,
+
+              }
+
+    try:
+
+        async with aiohttp.ClientSession() as session:
+
+            async with session.get(url, params=params, raise_for_status=True, ssl=False) as response:
+
+                data = await response.json()
+
+                if data["status"] == "success":
+                    return data['shortenedUrl']
+
+                    
+                    
+
+                else:
+
+                    logger.error(f"Error: {data['message']}")
+
+                    return f'https://go.{URL_SHORTENR_WEBSITE}/api?api={URL_SHORTNER_WEBSITE_API}&link={link}'
+
+    except Exception as e:
+
+        logger.error(e)
+
+        return f'{URL_SHORTENR_WEBSITE}/api?api={URL_SHORTNER_WEBSITE_API}&link={link}'
 
 def humanbytes(size):
     if not size:
