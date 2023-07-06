@@ -43,6 +43,9 @@ class temp(object):
     U_NAME = None
     B_NAME = None
     SETTINGS = {}
+    VERIFY = {}
+    SEND_ALL_TEMP = {}
+    KEYWORD = {}
 
 async def is_subscribed(bot, query):
     if not (AUTH_CHANNEL or REQ_CHANNEL):
