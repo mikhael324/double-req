@@ -278,7 +278,7 @@ async def advantage_spoll_choker(bot, query):
             
             await bot.send_message(
                  chat_id=LOG_CHANNEL,
-                 text=f"<b>#NoResult \n\nMovie | Series : #{movie} \n \n@Manu3324</b>"
+                 text=f"<b>#NoResult \n\nMovie | Series : <code>{movie}</code> \n \n@Manu3324</b>"
             )
             k = await query.message.edit(f"\n👋 Hello {reqstr.mention},\n\n <b>I couldn't find </b><b>'{movie}'</b><b> in my Database</b> \n \n <b> Maybe Not Yet Released In OTT Platforms ⚠️</b>")
             await asyncio.sleep(10)
