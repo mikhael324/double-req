@@ -275,7 +275,7 @@ async def advantage_spoll_choker(bot, query):
         else:
             reqstr1 = query.from_user.id if query.from_user else 0
             reqstr = await bot.get_users(reqstr1)
-            if NO_RESULTS_MSG:
+            
                 await bot.send_message(
                     chat_id=LOG_CHANNEL,
                     text=f"<b>No Results Found For : #{movie}</b>"
