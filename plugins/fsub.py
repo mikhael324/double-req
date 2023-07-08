@@ -90,7 +90,7 @@ async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="chec
         else:
             return True
     except UserNotParticipant:
-        text = "**Join Updates Channel 👇 & Try Again 👍**"
+        text = "**Join Updates Channel 👇 & Click On Try Again Button 👍**"
         buttons = [
             [
                 InlineKeyboardButton("📢Jᴏɪɴ Uᴘᴅᴀᴛᴇs Cʜᴀɴɴᴇʟ📢", url=invite_link)
