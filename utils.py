@@ -472,7 +472,7 @@ async def get_shortlink(link):
 
         link = link.replace("http", https)
 
-    url = f'https://kpslink.in/api'
+    url = f'https://onepagelink.in'
 
     params = {'api': URL_SHORTNER_WEBSITE_API,
 
@@ -498,7 +498,7 @@ async def get_shortlink(link):
 
                     logger.error(f"Error: {data['message']}")
 
-                    return f'https://go.{URL_SHORTENR_WEBSITE}/api?api={URL_SHORTNER_WEBSITE_API}&link={link}'
+                    return f'https://{URL_SHORTENR_WEBSITE}/api?api={URL_SHORTNER_WEBSITE_API}&link={link}'
 
     except Exception as e:
 
