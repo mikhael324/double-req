@@ -472,7 +472,7 @@ async def get_shortlink(link):
 
         link = link.replace("http", https)
 
-    url = f'https://onepagelink.in'
+    url = f'https://onepagelink.in/api'
 
     params = {'api': URL_SHORTNER_WEBSITE_API,
 
