@@ -12,6 +12,7 @@ db = JoinReqs
 
 async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="checksub"):
     global INVITE_LINK
+    INVITE_LINK = None  
 
     # Rest of the function code...
 
