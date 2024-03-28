@@ -77,41 +77,35 @@ async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="chec
 
 
     try:
-        user_channel_1 = await bot.get_chat_member(chat_id=REQ_CHANNEL_1, user_id=event.from_user.id)
-        user_channel_2 = await bot.get_chat_member(chat_id=REQ_CHANNEL_2, user_id=event.from_user.id)
+        user_channel_1 = await bot.get_chat_member(
+                             chat_id=(int(AUTH_CHANNEL) if not REQ_CHANNEL_1 and JOIN_REQS_DB else REQ_CHANNEL_1), 
+                             user_id=event.from_user.id
+                         )
+        user_channel_2 = await bot.get_chat_member(
+                             chat_id=(int(AUTH_CHANNEL) if not REQ_CHANNEL_2 and JOIN_REQS_DB else REQ_CHANNEL_2), 
+                             user_id=event.from_user.id
+                         )
 
-        if user_channel_1.status != "kicked" and user_channel_2.status != "kicked":
+        if user_channel_1.status == "member" and user_channel_2.status == "member":
+    # User is already joined both channels
             return True
         else:
-            text = "**Join Updates Channels Below & Click On Try Again Button 👍**"
-            buttons = [
-                [
-                    InlineKeyboardButton("📢 Join Updates Channel 1 ", url=invite_link_1),
-                    InlineKeyboardButton("📢 Join Updates Channel 2 ", url=invite_link_2)
-                ],
-                [
-                    InlineKeyboardButton("🔄 Try Again", callback_data=f"{mode}#{file_id}")
-                ]
-            ]
+             await bot.send_message(
+                 chat_id=event.from_user.id,
+                 text="Sorry Sir, You are not joined both channels.",
+                 parse_mode=enums.ParseMode.MARKDOWN,
+                 disable_web_page_preview=True,
+                 reply_to_message_id=event.message_id
+             )
+             return False
 
-            if file_id is False:
-                buttons.pop()
-
-            if not is_cb:
-                await event.reply(
-                    text=text,
-                    quote=True,
-                    reply_markup=InlineKeyboardMarkup(buttons),
-                    parse_mode=enums.ParseMode.MARKDOWN,
-                )
-            return False
 
     except UserNotParticipant:
         text = "**Join Updates Channels Below & Click On Try Again Button 👍**"
         buttons = [
             [
-                InlineKeyboardButton("📢 Join Updates Channel 1 👇", url=invite_link_1),
-                InlineKeyboardButton("📢 Join Updates Channel 2 👇", url=invite_link_2)
+                InlineKeyboardButton("📢 Join Updates Channel 1 ", url=invite_link_1),
+                InlineKeyboardButton("📢 Join Updates Channel 2 ", url=invite_link_2)
             ],
             [
                 InlineKeyboardButton("🔄 Try Again", callback_data=f"{mode}#{file_id}")
