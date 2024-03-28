@@ -102,7 +102,7 @@ async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="chec
         else:
             return True
     except UserNotParticipant:
-        text = "**Join Channels and Try Again**"
+        text = "**Join Channels to Proceed**"
         buttons = []
         if REQ_CHANNEL_1:
             buttons.append(InlineKeyboardButton("Join Channel 1", url=INVITE_LINKS[REQ_CHANNEL_1]))
@@ -116,7 +116,7 @@ async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="chec
             await event.reply(
                 text=text,
                 quote=True,
-                reply_markup=InlineKeyboardMarkup([buttons, [InlineKeyboardButton("Try Again", callback_data=f"{mode}#{file_id}")]]),
+                reply_markup=InlineKeyboardMarkup([buttons]),
                 parse_mode=enums.ParseMode.MARKDOWN,
             )
         return False
@@ -139,4 +139,4 @@ async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="chec
 def set_global_invite(url: str):
     global INVITE_LINKS
     INVITE_LINKS = url
-            
+                   
