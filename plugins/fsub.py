@@ -29,20 +29,12 @@ async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="chec
 
     try:
         if INVITE_LINK is None:
-            invite_link_1 = (await bot.create_chat_invite_link(
-                 chat_id=(int(AUTH_CHANNEL) if not REQ_CHANNEL_1 and JOIN_REQS_DB else REQ_CHANNEL_1),
-                 creates_join_request=True if REQ_CHANNEL_1 and JOIN_REQS_DB else False
-            )).invite_link
-            invite_link_2 = (await bot.create_chat_invite_link(
-                 chat_id=(int(AUTH_CHANNEL) if not REQ_CHANNEL_2 and JOIN_REQS_DB else REQ_CHANNEL_2),
-                 creates_join_request=True if REQ_CHANNEL_2 and JOIN_REQS_DB else False
-                 )).invite_link
+            invite_link_1 = (await bot.create_chat_invite_link(chat_id=REQ_CHANNEL_1, creates_join_request=True)).invite_link
+            invite_link_2 = (await bot.create_chat_invite_link(chat_id=REQ_CHANNEL_2, creates_join_request=True)).invite_link
             INVITE_LINK = (invite_link_1, invite_link_2)
             logger.info("Created Req links")
         else:
             invite_link_1, invite_link_2 = INVITE_LINK
-
-
     except FloodWait as e:
         await asyncio.sleep(e.x)
         fix_ = await ForceSub(bot, event, file_id)
@@ -51,11 +43,12 @@ async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="chec
     except Exception as err:
         print(f"Unable to do Force Subscribe to {REQ_CHANNEL_1} and {REQ_CHANNEL_2}\n\nError: {err}\n\n")
         await event.reply(
-            text="Something is Wrong.",
+            text="Failed To Create Invite Link 🙆 Report 👉 @Maeve_324",
             parse_mode=enums.ParseMode.MARKDOWN,
             disable_web_page_preview=True
         )
         return False
+
 
     if REQ_CHANNEL_1 and REQ_CHANNEL_2 and JOIN_REQS_DB and db().isActive():
         try:
