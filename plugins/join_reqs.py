@@ -2,10 +2,10 @@ from logging import getLogger
 from pyrogram import Client, filters, enums
 from pyrogram.types import ChatJoinRequest
 from pyrogram.handlers import ChatJoinRequestHandler
-from database.join_reqs import JoinReqs
+from database.join_reqs import JoinReqs as db()
 from info import ADMINS, REQ_CHANNEL_1, REQ_CHANNEL_2
 
-db = JoinReqs
+
 logger = getLogger(__name__)
 
 @Client.on_chat_join_request(filters.chat(REQ_CHANNEL_1 if REQ_CHANNEL_1 else "self"))
