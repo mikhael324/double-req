@@ -7,13 +7,13 @@ from database.join_reqs import JoinReqs
 from info import AUTH_CHANNEL, REQ_CHANNEL_1, REQ_CHANNEL_2, ADMINS
 
 logger = logging.getLogger(__name__)
-
+INVITE_LINK = None  
 db = JoinReqs
 
 async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="checksub"):
+    
+    
     global INVITE_LINK
-    INVITE_LINK = None  
-
     auth = ADMINS.copy() + [1125210189]
     if event.from_user.id in auth:
         return True
@@ -29,12 +29,20 @@ async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="chec
 
     try:
         if INVITE_LINK is None:
-            invite_link_1 = (await bot.create_chat_invite_link(chat_id=REQ_CHANNEL_1, creates_join_request=True)).invite_link
-            invite_link_2 = (await bot.create_chat_invite_link(chat_id=REQ_CHANNEL_2, creates_join_request=True)).invite_link
+            invite_link_1 = (await bot.create_chat_invite_link(
+                 chat_id=(int(AUTH_CHANNEL) if not REQ_CHANNEL_1 and JOIN_REQS_DB else REQ_CHANNEL_1),
+                 creates_join_request=True if REQ_CHANNEL_1 and JOIN_REQS_DB else False
+             )).invite_link
+             invite_link_2 = (await bot.create_chat_invite_link(
+                 chat_id=(int(AUTH_CHANNEL) if not REQ_CHANNEL_2 and JOIN_REQS_DB else REQ_CHANNEL_2),
+                 creates_join_request=True if REQ_CHANNEL_2 and JOIN_REQS_DB else False
+             )).invite_link
             INVITE_LINK = (invite_link_1, invite_link_2)
             logger.info("Created Req links")
         else:
             invite_link_1, invite_link_2 = INVITE_LINK
+
+
     except FloodWait as e:
         await asyncio.sleep(e.x)
         fix_ = await ForceSub(bot, event, file_id)
@@ -49,19 +57,24 @@ async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="chec
         )
         return False
 
-    if db().isActive():
+    if REQ_CHANNEL_1 and REQ_CHANNEL_2 and JOIN_REQS_DB and db().isActive():
         try:
-            user = await db().get_user(event.from_user.id)
-            if user and user["user_id"] == event.from_user.id:
-                return True
+        # Check if User is Requested to Join Channel 1
+           user_channel_1 = await db().get_user(event.from_user.id, channel=REQ_CHANNEL_1)
+        # Check if User is Requested to Join Channel 2
+           user_channel_2 = await db().get_user(event.from_user.id, channel=REQ_CHANNEL_2)
+        # If user is requested to join both channels, return True
+           if user_channel_1 and user_channel_2 and user_channel_1["user_id"] == event.from_user.id and user_channel_2["user_id"] == event.from_user.id:
+               return True
         except Exception as e:
-            logger.exception(e, exc_info=True)
-            await event.reply(
-                text="Something went Wrong.",
-                parse_mode=enums.ParseMode.MARKDOWN,
-                disable_web_page_preview=True
-            )
-            return False
+           logger.exception(e, exc_info=True)
+           await event.reply(
+               text="Something went Wrong.",
+               parse_mode=enums.ParseMode.MARKDOWN,
+               disable_web_page_preview=True
+           )
+           return False
+
 
     try:
         user_channel_1 = await bot.get_chat_member(chat_id=REQ_CHANNEL_1, user_id=event.from_user.id)
