@@ -53,9 +53,9 @@ async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="chec
     if REQ_CHANNEL_1 and REQ_CHANNEL_2 and JOIN_REQS_DB and db().isActive():
         try:
         # Check if User is Requested to Join Channel 1
-           user_channel_1 = await db().get_user(event.from_user.id, channel=REQ_CHANNEL_1)
+           user_channel_1 = await db().get_user(event.from_user.id, channel=1)
         # Check if User is Requested to Join Channel 2
-           user_channel_2 = await db().get_user(event.from_user.id, channel=REQ_CHANNEL_2)
+           user_channel_2 = await db().get_user(event.from_user.id, channel=2)
         # If user is requested to join both channels, return True
            if user_channel_1 and user_channel_2 and user_channel_1["user_id"] == event.from_user.id and user_channel_2["user_id"] == event.from_user.id:
                return True
