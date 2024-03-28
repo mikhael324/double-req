@@ -19,7 +19,7 @@ class JoinReqs:
     def isActive(self):
         return self.client is not None
 
-    async def add_user(self, user_id, first_name, username, date, channel):
+    async def add_user(self, user_id, first_name, username, date, channel=None):
         try:
             if channel == 1:
                 await self.col1.insert_one({"_id": int(user_id), "user_id": int(user_id), "first_name": first_name, "username": username, "date": date})
@@ -28,25 +28,25 @@ class JoinReqs:
         except Exception as e:
             print(f"Error adding user: {e}")
 
-    async def get_user(self, user_id, channel):
+    async def get_user(self, user_id, channel=None):
         if channel == 1:
             return await self.col1.find_one({"user_id": int(user_id)})
         elif channel == 2:
             return await self.col2.find_one({"user_id": int(user_id)})
 
-    async def delete_user(self, user_id, channel):
+    async def delete_user(self, user_id, channel=None):
         if channel == 1:
             await self.col1.delete_one({"user_id": int(user_id)})
         elif channel == 2:
             await self.col2.delete_one({"user_id": int(user_id)})
 
-    async def delete_all_users(self, channel):
+    async def delete_all_users(self, channel=None):
         if channel == 1:
             await self.col1.delete_many({})
         elif channel == 2:
             await self.col2.delete_many({})
 
-    async def get_all_users_count(self, channel):
+    async def get_all_users_count(self, channel=None):
         if channel == 1:
             return await self.col1.count_documents({})
         elif channel == 2:
