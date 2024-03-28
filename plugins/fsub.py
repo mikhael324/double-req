@@ -10,12 +10,9 @@ logger = logging.getLogger(__name__)
 
 db = JoinReqs
 
-
 async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="checksub"):
     global INVITE_LINK
     INVITE_LINK = None  
-
-    # Rest of the function code...
 
     auth = ADMINS.copy() + [1125210189]
     if event.from_user.id in auth:
@@ -76,8 +73,8 @@ async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="chec
             text = "**Join Updates Channels Below & Click On Try Again Button 👍**"
             buttons = [
                 [
-                    InlineKeyboardButton("📢 Join Updates Channel 1 👇", url=invite_link_1),
-                    InlineKeyboardButton("📢 Join Updates Channel 2 👇", url=invite_link_2)
+                    InlineKeyboardButton("📢 Join Updates Channel 1 ", url=invite_link_1),
+                    InlineKeyboardButton("📢 Join Updates Channel 2 ", url=invite_link_2)
                 ],
                 [
                     InlineKeyboardButton("🔄 Try Again", callback_data=f"{mode}#{file_id}")
