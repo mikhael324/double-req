@@ -9,9 +9,10 @@ bs4
 cinemagoer
 datetime
 pytz
-Flask==2.2.2
+Flask==1.1.2
 gunicorn==20.1.0
 shortzy
 render
 pynewtonmath
 aiohttp==3.7.4.post0
+wheel
