@@ -54,12 +54,15 @@ async def is_subscribed(bot: Client, query):
     elif query.from_user.id in ADMINS:
         return True
 
-    if db2().isActive():
-        user = await db2().get_user(query.from_user.id)
-        if user:
-            return True
-        else:
-            return False
+    if JoinReqs().isActive():
+    user_channel_1 = await JoinReqs().get_user(query.from_user.id, channel=1)
+    user_channel_2 = await JoinReqs().get_user(query.from_user.id, channel=2)
+    
+    if user_channel_1 and user_channel_2:
+        return True
+    else:
+        return False
+
 
     try:
         user = await bot.get_chat_member(AUTH_CHANNEL, query.from_user.id)
