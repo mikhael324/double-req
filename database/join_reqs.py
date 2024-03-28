@@ -25,8 +25,9 @@ class JoinReqs:
                 await self.col1.insert_one({"_id": int(user_id), "user_id": int(user_id), "first_name": first_name, "username": username, "date": date})
             elif channel == 2:
                 await self.col2.insert_one({"_id": int(user_id), "user_id": int(user_id), "first_name": first_name, "username": username, "date": date})
-        except Exception as e:
-            print(f"Error adding user: {e}")
+        except:
+            pass
+            
 
     async def get_user(self, user_id, channel=None):
         if channel == 1:
