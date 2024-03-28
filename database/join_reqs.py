@@ -17,19 +17,16 @@ class JoinReqs:
             self.col2 = None
 
     def isActive(self):
-        if self.client is not None:
-            return True
-        else:
-            return False
+        return self.client is not None
 
     async def add_user(self, user_id, first_name, username, date, channel):
         try:
             if channel == 1:
-                await self.col1.insert_one({"_id": int(user_id),"user_id": int(user_id), "first_name": first_name, "username": username, "date": date})
+                await self.col1.insert_one({"_id": int(user_id), "user_id": int(user_id), "first_name": first_name, "username": username, "date": date})
             elif channel == 2:
-                await self.col2.insert_one({"_id": int(user_id),"user_id": int(user_id), "first_name": first_name, "username": username, "date": date})
-        except:
-            pass
+                await self.col2.insert_one({"_id": int(user_id), "user_id": int(user_id), "first_name": first_name, "username": username, "date": date})
+        except Exception as e:
+            print(f"Error adding user: {e}")
 
     async def get_user(self, user_id, channel):
         if channel == 1:
@@ -54,4 +51,3 @@ class JoinReqs:
             return await self.col1.count_documents({})
         elif channel == 2:
             return await self.col2.count_documents({})
-            
