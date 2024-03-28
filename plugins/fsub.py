@@ -33,10 +33,10 @@ async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="chec
                  chat_id=(int(AUTH_CHANNEL) if not REQ_CHANNEL_1 and JOIN_REQS_DB else REQ_CHANNEL_1),
                  creates_join_request=True if REQ_CHANNEL_1 and JOIN_REQS_DB else False
              )).invite_link
-             invite_link_2 = (await bot.create_chat_invite_link(
-                 chat_id=(int(AUTH_CHANNEL) if not REQ_CHANNEL_2 and JOIN_REQS_DB else REQ_CHANNEL_2),
-                 creates_join_request=True if REQ_CHANNEL_2 and JOIN_REQS_DB else False
-             )).invite_link
+                 invite_link_2 = (await bot.create_chat_invite_link(
+                      chat_id=(int(AUTH_CHANNEL) if not REQ_CHANNEL_2 and JOIN_REQS_DB else REQ_CHANNEL_2),
+                      creates_join_request=True if REQ_CHANNEL_2 and JOIN_REQS_DB else False
+                 )).invite_link
             INVITE_LINK = (invite_link_1, invite_link_2)
             logger.info("Created Req links")
         else:
