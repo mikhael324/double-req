@@ -116,7 +116,7 @@ async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="chec
             await event.reply(
                 text=text,
                 quote=True,
-                reply_markup=InlineKeyboardMarkup([buttons]),
+                reply_markup=InlineKeyboardMarkup([buttons, [InlineKeyboardButton("Try Again", callback_data=f"{mode}#{file_id}")]]),
                 parse_mode=enums.ParseMode.MARKDOWN,
             )
         return False
