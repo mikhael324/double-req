@@ -3,11 +3,11 @@ import asyncio
 from pyrogram import Client, filters, enums
 from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
-from database.join_reqs import JoinReqs as db()
+from database.join_reqs import JoinReqs 
 from info import AUTH_CHANNEL, REQ_CHANNEL_1, REQ_CHANNEL_2, ADMINS
 
 logger = logging.getLogger(__name__)
-
+db = JoinReqs
 
 
 async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="checksub"):
