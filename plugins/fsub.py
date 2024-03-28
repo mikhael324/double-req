@@ -7,6 +7,7 @@ from database.join_reqs import JoinReqs
 from info import AUTH_CHANNEL, REQ_CHANNEL_1, REQ_CHANNEL_2, ADMINS
 
 logger = logging.getLogger(__name__)
+
 db = JoinReqs
 
 
