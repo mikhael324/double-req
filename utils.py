@@ -62,24 +62,17 @@ async def is_subscribed(bot: Client, query):
             return False
 
     try:
-        if AUTH_CHANNEL:
-            user = await bot.get_chat_member(AUTH_CHANNEL, query.from_user.id)
-            if user.status != "kicked":
-                return True
-            else:
-                return False
-        elif REQ_CHANNEL_1 and REQ_CHANNEL_2:
-            user_channel_1 = await bot.get_chat_member(REQ_CHANNEL_1, query.from_user.id)
-            user_channel_2 = await bot.get_chat_member(REQ_CHANNEL_2, query.from_user.id)
-            if user_channel_1.status != "kicked" and user_channel_2.status != "kicked":
-                return True
-            else:
-                return False
+        user = await bot.get_chat_member(AUTH_CHANNEL, query.from_user.id)
     except UserNotParticipant:
         return False
     except Exception as e:
         logger.exception(e)
         return False
+    else:
+        if not user.status == enums.ChatMemberStatus.BANNED:
+            return True
+        else:
+            return False
 
 async def get_poster(query, bulk=False, id=False, file=None):
     if not id:
