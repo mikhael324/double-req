@@ -1,6 +1,6 @@
 import logging
 from pyrogram.errors import InputUserDeactivated, UserNotParticipant, FloodWait, UserIsBlocked, PeerIdInvalid
-from info import AUTH_CHANNEL, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM, REQ_CHANNEL, ADMINS, URL_SHORTENR_WEBSITE, URL_SHORTNER_WEBSITE_API
+from info import AUTH_CHANNEL, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM, REQ_CHANNEL_1, REQ_CHANNEL_2, ADMINS, URL_SHORTENR_WEBSITE, URL_SHORTNER_WEBSITE_API
 from imdb import Cinemagoer 
 import asyncio
 from pyrogram.types import Message, InlineKeyboardButton
@@ -47,8 +47,8 @@ class temp(object):
     SEND_ALL_TEMP = {}
     KEYWORD = {}
 
-async def is_subscribed(bot, query):
-    if not (AUTH_CHANNEL or REQ_CHANNEL):
+async def is_subscribed(bot: Client, query):
+    if not (AUTH_CHANNEL or REQ_CHANNEL_1 or REQ_CHANNEL_2):
         return True
     elif query.from_user.id in ADMINS:
         return True
@@ -59,18 +59,26 @@ async def is_subscribed(bot, query):
             return True
         else:
             return False
+
     try:
-        user = await bot.get_chat_member(AUTH_CHANNEL, query.from_user.id)
+        if AUTH_CHANNEL:
+            user = await bot.get_chat_member(AUTH_CHANNEL, query.from_user.id)
+            if user.status != "kicked":
+                return True
+            else:
+                return False
+        elif REQ_CHANNEL_1 and REQ_CHANNEL_2:
+            user_channel_1 = await bot.get_chat_member(REQ_CHANNEL_1, query.from_user.id)
+            user_channel_2 = await bot.get_chat_member(REQ_CHANNEL_2, query.from_user.id)
+            if user_channel_1.status != "kicked" and user_channel_2.status != "kicked":
+                return True
+            else:
+                return False
     except UserNotParticipant:
         return False
     except Exception as e:
         logger.exception(e)
         return False
-    else:
-        if not user.status == enums.ChatMemberStatus.BANNED:
-            return True
-        else:
-            return False
 
 async def get_poster(query, bulk=False, id=False, file=None):
     if not id:
