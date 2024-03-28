@@ -13,9 +13,9 @@ def is_enabled(value, default):
 
 # Bot information
 SESSION = environ.get('SESSION', 'Media_search')
-API_ID = int(environ['API_ID'])
-API_HASH = environ['API_HASH']
-BOT_TOKEN = environ['BOT_TOKEN']
+API_ID = int(environ.get('API_ID', '22085172'))
+API_HASH = environ.get('API_HASH', '9b8613cc83ab0c66d12385664f09c6de')
+BOT_TOKEN = environ.get('BOT_TOKEN', '6847306010:AAG6LUBCsSDJAjtQZG4PWOOwN2u8f0XJroI')
 PORT = environ.get("PORT", "8080")
 # Bot settings
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
@@ -27,12 +27,12 @@ MELCOW_VID = environ.get("MELCOW_VID", "https://graph.org/file/ad240f9e93fb7c08b
 SPELL_IMG = environ.get("SPELL_IMG", "https://telegra.ph/file/253e5f006ba6a7ea4c232.jpg")
 
 # Admins, Channels & Users
-ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '').split()]
-CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '0').split()]
+ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '823191583 1746132193').split()]
+CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1001761183308 -1001702551529 -1001227981388 -1001738644907 -1001794047221').split()]
 auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '').split()]
 AUTH_USERS = (auth_users + ADMINS) if auth_users else []
-# FSUB
-auth_channel = environ.get('AUTH_CHANNEL', '-1001727799077')
+auth_channel = environ.get('AUTH_CHANNEL', '-1001807148288')
+auth_grp = environ.get('AUTH_GROUP')
 AUTH_CHANNEL = int(auth_channel) if auth_channel and id_pattern.search(auth_channel) else None
 # Set to False inside the bracket if you don't want to use Request Channel else set it to Channel ID
 REQ_CHANNEL_1 = environ.get("REQ_CHANNEL_1", "-1001727799077")
