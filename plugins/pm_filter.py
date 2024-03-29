@@ -276,11 +276,11 @@ async def advantage_spoll_choker(bot, query):
                  chat_id=LOG_CHANNEL,
                  text=f"<b>#NoResult \n\nMovie | Series : <code>{movie}</code> \n \n@Manu3324</b>"
             )
-            k = await query.message.edit(f"\n👋 Hello {reqstr.mention},\n\n <b>I couldn't find </b><b>'{movie}'</b><b> in my Database</b> \n \n <b> Maybe Not Yet Released In OTT Platforms ⚠️</b>")
-            await asyncio.sleep(10)
-            await k.delete()
-            await query.message.reply_to_message.delete()
-            
+            k = await query.message.edit(f"\n👋 Hello {reqstr.mention},\n\n <b> Your Movie: </b><b>'{movie}'</b><b> \n \n Will Be Uploaded Here 👇 Join Now </b>",
+                                  reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⭕ Join Here ⭕", url="https://t.me/mvm_links")]]))
+                await asyncio.sleep(10)
+                await k.delete()
+                await query.message.reply_to_message.delete()
        
                 
             
