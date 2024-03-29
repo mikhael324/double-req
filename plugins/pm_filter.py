@@ -278,9 +278,9 @@ async def advantage_spoll_choker(bot, query):
             )
             k = await query.message.edit(f"\n👋 Hello {reqstr.mention},\n\n <b> Your Movie: </b><b>'{movie}'</b><b> \n \n Will Be Uploaded Here 👇 Join Now </b>",
                                   reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⭕ Join Here ⭕", url="https://t.me/+GfckmB0b86oyMWU1")]]))
-                await asyncio.sleep(10)
-                await k.delete()
-                await query.message.reply_to_message.delete()
+                                    await asyncio.sleep(10)
+                                    await k.delete()
+                                    await query.message.reply_to_message.delete()
        
                 
             
