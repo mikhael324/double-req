@@ -94,14 +94,16 @@ async def ForceSub(bot: Client, event: Message, file_id: str = False, mode="chec
 
 
     except UserNotParticipant:
-        text = "**Join Updates Channels Below & Click On Try Again Button 👍**"
+        text = "**First Join Both Channels Below & Click Get File Button 👍**"
         buttons = [
             [
-                InlineKeyboardButton("📢 Join Updates Channel 1 ", url=invite_link_1),
-                InlineKeyboardButton("📢 Join Updates Channel 2 ", url=invite_link_2)
+                InlineKeyboardButton("📢 First Click Here To Join  ", url=invite_link_1)
             ],
             [
-                InlineKeyboardButton("🔄 Try Again", callback_data=f"{mode}#{file_id}")
+                InlineKeyboardButton("📢 Second Click Here To Join ", url=invite_link_2)
+            ],
+            [
+                InlineKeyboardButton("🔄 Get File ", callback_data=f"{mode}#{file_id}")
             ]
         ]
 
