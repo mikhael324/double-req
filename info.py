@@ -69,12 +69,7 @@ IMDB = is_enabled((environ.get('IMDB', "False")), False)
 AUTO_FFILTER = is_enabled((environ.get('AUTO_FFILTER', "True")), True)
 AUTO_DELETE = is_enabled((environ.get('AUTO_DELETE', "True")), True)
 SINGLE_BUTTON = is_enabled((environ.get('SINGLE_BUTTON', "True")), True)
-CUSTOM_FILE_CAPTION = environ.get("CUSTOM_FILE_CAPTION", "<b>File Name:</b> <code>{file_name}</code> \n \n \n<b>🔰👉 Subscribe our Youtube Channel to win free Iphone Giveaway🥺👇 ❤️  \n \n https://youtube.com/@ThePlotlinee
-https://youtube.com/@ThePlotlinee
-https://youtube.com/@ThePlotlinee  \n \n -------------------------
-➧@Cinemaclub_3
-➧@Cinemaclub_4
-➧@ccl_links</b>")
+CUSTOM_FILE_CAPTION = environ.get("CUSTOM_FILE_CAPTION", "<b>File Name:</b> <code>{file_name}</code> \n \n \n <b>🔰👉 Subscribe our Youtube Channel to win free Iphone Giveaway🥺👇 ❤️  \n \n https://youtube.com/@ThePlotlinee \n https://youtube.com/@ThePlotlinee \n https://youtube.com/@ThePlotlinee  \n \n ------------------------- \n ➧@Cinemaclub_3 \n ➧@Cinemaclub_4 \n ➧@ccl_links</b>")
 BATCH_FILE_CAPTION = environ.get("BATCH_FILE_CAPTION", CUSTOM_FILE_CAPTION)
 IMDB_TEMPLATE = environ.get("IMDB_TEMPLATE", f"{script.IMDB_TEMPLATE_TXT}")
 LONG_IMDB_DESCRIPTION = is_enabled(environ.get("LONG_IMDB_DESCRIPTION", "False"), False)
