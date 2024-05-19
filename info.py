@@ -21,7 +21,7 @@ PORT = environ.get("PORT", "8080")
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
 USE_CAPTION_FILTER = bool(environ.get('USE_CAPTION_FILTER', True))
 
-PICS = (environ.get('PICS', 'https://telegra.ph/file/253e5f006ba6a7ea4c232.jpg')).split()
+PICS = (environ.get('PICS', 'https://graph.org/file/39204c3e376d9a367717e.jpg')).split()
 NOR_IMG = environ.get("NOR_IMG", "https://telegra.ph/file/253e5f006ba6a7ea4c232.jpg")
 MELCOW_VID = environ.get("MELCOW_VID", "https://graph.org/file/ad240f9e93fb7c08be841.mp4")
 SPELL_IMG = environ.get("SPELL_IMG", "https://telegra.ph/file/253e5f006ba6a7ea4c232.jpg")
